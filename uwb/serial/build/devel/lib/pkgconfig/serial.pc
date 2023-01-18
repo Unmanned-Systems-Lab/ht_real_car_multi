@@ -1,0 +1,8 @@
+prefix=/home/agilex/catkin_ws/src/uwb/serial/build/devel
+
+Name: serial
+Description: Description of serial
+Version: 1.2.1
+Cflags: -I/home/agilex/catkin_ws/src/uwb/serial/include
+Libs: -L${prefix}/lib -lserial -lrt -lpthread
+Requires: 

@@ -1,0 +1,25 @@
+<?xml version='1'?>
+<launch>
+  <include file="$(find livox_ros_driver)/launch/livox_lidar.launch" />
+  <include file="$(find pointcloud_to_laserscan)/launch/point_to_scan.launch"/>
+  <include file="$(find hunter_base)/launch/hunter_base.launch"/>
+  <node pkg="hunter_base" type="livox2point" name="livox2point" output="screen" />
+     <node pkg="tf" type="static_transform_publisher" name="base_link_to_livox" 
+     args="0.1 0.0 0.0 0.0 0.0 0.0 base_link livox 50"/>
+     <node pkg="tf" type="static_transform_publisher" name="base_link_to_camera_link" 
+     args="0.0 0.0 0.3 0.0 0.0 0.0 base_link camera_link 50"/>
+<!--
+  <node pkg="rf2o_laser_odometry" type="rf2o_laser_odometry_node" name="rf2o_laser_odometry" output="screen" >
+    <param name="laser_scan_topic" value="/scan" />         # topic where the lidar scans are being published
+    <param name="odom_topic" value="/odom" />              # topic where tu publish the odometry estimations
+    
+    <param name="base_frame_id" value="base_link" />            # frame_id (tf) of the mobile robot base. A tf transform from the laser_frame to the base_frame is mandatory
+    <param name="odom_frame_id" value="odom" />                # frame_id (tf) to publish the odometry estimations  
+    <param name="publish_tf" value="true" />                   # wheter or not to publish the tf::transform (base->odom)  
+    <param name="init_pose_from_topic" value="" />             # (Odom topic) Leave empty to start at point (0,0)
+    <param name="freq" value="10.0" />                          # Execution frequency.
+    <param name="verbose" value="false" />                      # verbose
+  </node>
+-->
+
+</launch>
