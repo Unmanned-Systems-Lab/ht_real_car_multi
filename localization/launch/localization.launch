@@ -1,0 +1,8 @@
+<launch>
+    <!-- <node name="map_fusion" pkg="map_fusion"
+          type="map_fusion" output="screen"/>
+    <param name="config_file_name" value="ttt.yaml"/> -->
+
+    <node name ="localization" pkg="localization" type="localization" output="screen" />
+    <node pkg="tf" type="static_transform_publisher" name="tf_map2odom" args="0 0 0 0 0 0  map odometry 100"/>
+</launch> 

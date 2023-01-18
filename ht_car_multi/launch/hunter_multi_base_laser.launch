@@ -1,5 +1,5 @@
 <launch>
-<arg name="car_name" value="car100" />
+<arg name="car_name" value="car3" />
  <group ns = "$(arg car_name)">
     <param name="car_name" value="$(arg car_name)" />
     <arg name="port_name" default="can0" />

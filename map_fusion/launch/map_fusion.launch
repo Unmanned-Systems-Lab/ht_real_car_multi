@@ -1,0 +1,8 @@
+<launch>
+    <!-- <node name="map_fusion" pkg="map_fusion"
+          type="map_fusion" output="screen"/>
+    <param name="config_file_name" value="ttt.yaml"/> -->
+    <arg name="map_fig" default="$(find map_fusion)/initial_map/NPU_map.yaml"/>
+    <node name ="map_server" pkg="map_server" type="map_server" output="screen" respawn="false" args="$(arg map_fig)"/>
+
+</launch> 

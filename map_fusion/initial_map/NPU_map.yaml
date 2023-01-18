@@ -1,0 +1,8 @@
+%YAML:1.0
+image: staticmap_zoom_ps_white.png
+resolution: 0.0345
+origin: [-44.16, -44.16, 0] #origin in m
+occupied_thresh: 0.2
+free_thresh: 0.01 # Taken from the Willow Garage map in the turtlebot_navigation package
+negate: 0
+#mapsize: [300.0,300.0] # mapsize [x,y] in m

@@ -1,0 +1,43 @@
+<launch>
+<arg name="car_name" value="car3" />
+ <group ns = "$(arg car_name)">
+ 
+    <param name="car_name" value="$(arg car_name)" />
+    <arg name="port_name" default="can0" />
+    <arg name="simulated_robot" default="false" />
+    <arg name="publish_tf" default="true" />
+
+    <node name="hunter_base_node" pkg="hunter_base" type="hunter_base_node_multi" output="screen">
+        <param name="port_name" type="string" value="$(arg port_name)" />
+        <param name="simulated_robot" type="bool" value="$(arg simulated_robot)" />
+        <param name="publish_tf" type="bool" value="$(arg publish_tf)" />
+
+        <!-- <param name="odom_frame" type="string" value="$(arg car_name)/odom" /> -->
+        <!-- <param name="base_frame" type="string" value="$(arg car_name)/base_link" /> -->
+        <param name="odom_frame" type="string" value="/odom" />
+        <param name="base_frame" type="string" value="/base_link" />
+        
+    </node>
+
+  <include file="$(find livox_ros_driver)/launch/livox_lidar_multi.launch" >
+        <arg name="car_name" value="$(arg car_name)"/>
+  </include>
+  <include file="$(find pointcloud_to_laserscan)/launch/point_to_scan.launch"/>
+  <!-- <include file="$(find hunter_base)/launch/hunter_base.launch"/> -->
+  <node pkg="hunter_base" type="livox2point_multi" name="livox2point" output="screen" />
+     <node pkg="tf" type="static_transform_publisher" name="base_link_to_livox" 
+     args="0.1 0.0 0.0 0.0 0.0 0.0 $(arg car_name)/base_link $(arg car_name)/livox 50"/>
+     <node pkg="tf" type="static_transform_publisher" name="base_link_to_camera_link" 
+     args="0.0 0.0 0.3 0.0 0.0 0.0 $(arg car_name)/base_link $(arg car_name)/camera_link 50"/>
+      <env name="ROSCONSOLE_CONFIG_FILE" value="$(find fixposition_driver)/launch/rosconsole.conf"/>
+
+
+  <node name="fixposition_driver" pkg="fixposition_driver" type="fixposition_driver" output="screen" respawn="true" respawn_delay="5">
+        <rosparam command="load" file="$(find fixposition_driver)/launch/tcp.yaml" />
+</node>
+
+<node name ="localization" pkg="localization" type="localization" output="screen" />
+    <node pkg="tf" type="static_transform_publisher" name="tf_map2odom" args="0 0 0 0 0 0  $(arg car_name)/map $(arg car_name)/odometry 100"/>
+
+</group>
+</launch>

@@ -48,13 +48,13 @@ void HunterROSMessenger::SetupSubscription() {
 void HunterROSMessenger::SetupSubscription_multi(std::string car_name) {
   // odometry publisher
   odom_publisher_ = nh_->advertise<nav_msgs::Odometry>(odom_frame_, 50);
-  // status_publisher_ =
-  //     nh_->advertise<hunter_msgs::HunterStatus>("/"+car_name+"/hunter_status", 10);
-  // BMS_status_publisher_ = nh_->advertise<hunter_msgs::HunterBmsStatus>("/"+car_name+"/BMS_status", 10);
-
   status_publisher_ =
-      nh_->advertise<hunter_msgs::HunterStatus>("/hunter_status", 10);
-  BMS_status_publisher_ = nh_->advertise<hunter_msgs::HunterBmsStatus>("/BMS_status", 10);
+      nh_->advertise<hunter_msgs::HunterStatus>("/"+car_name+"/hunter_status", 10);
+  BMS_status_publisher_ = nh_->advertise<hunter_msgs::HunterBmsStatus>("/"+car_name+"/BMS_status", 10);
+
+  // status_publisher_ =
+  //     nh_->advertise<hunter_msgs::HunterStatus>("/hunter_status", 10);
+  // BMS_status_publisher_ = nh_->advertise<hunter_msgs::HunterBmsStatus>("/BMS_status", 10);
 
   // cmd subscriber
   motion_cmd_subscriber_ = nh_->subscribe<geometry_msgs::Twist>(
