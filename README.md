@@ -17,7 +17,7 @@
 - 修改小车命名空间
 
   ```
-  #在每一个要使用的launch文件中修改 变量car_name的值为该车对应的值
+  #在每一个要使用的launch文件(ht_car_multi/launch文件夹里的所有launch文件使用都需要修改)中修改 变量car_name的值为该车对应的值
   #例如：
   gedit ~/myh_ws/src/ht_car_multi/launch/hunter_multi_base.launch
   # 将car100修改成car+小车编号 例如小车编号为03 小车命名空间改为car3
