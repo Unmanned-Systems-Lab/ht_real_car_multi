@@ -17,11 +17,12 @@
 - 修改小车命名空间
 
   ```
+  #在每一个要使用的launch文件中修改 变量car_name的值为该车对应的值
+  #例如：
   gedit ~/myh_ws/src/ht_car_multi/launch/hunter_multi_base.launch
   # 将car100修改成car+小车编号 例如小车编号为03 小车命名空间改为car3
   gedit ~/myh_ws/src/ht_car_multi/launch/hunter_multi_base_laser.launch
   # 将car100修改成car+小车编号 例如小车编号为03 小车命名空间改为car3
-  gedit
   ```
 
 - 增加环境变量
@@ -59,9 +60,40 @@
   roslaunch ht_car_multi hunter_multi_base_laser.launch
   ```
 
+- 启动多车使用的底盘和固态雷达话题发布和**RTK** 节点
+
+  ```
+  roslaunch ht_car_multi hunter_multi_base_laser_fixposition.launch
+  ```
+
+- 启动多车使用的底盘和固态雷达话题发布和RTK和**主车地图发布**节点
+
+  ```
+  roslaunch ht_car_multi hunter_multi_base_laser_fixposition_map_main_car.launch
+  ```
+
+- 启动多车使用的底盘和固态雷达话题发布和RTK和**从车定位** 节点
+
+  ```
+  roslaunch ht_car_multi hunter_multi_base_laser_fixposition_location_follow_car.launch
+  ```
+
+
+
 # 备注
 
-由于有些话题不清楚是用于做什么的，没有加命名空间
+- 运行roslaunch ht_car_multi hunter_multi_base_laser_fixposition_map_main_car.launch
 
-- ![](README.assets/Screenshot%20from%202023-01-18%2011-29-08-16740139282391.png)
-- ![](README.assets/Screenshot%20from%202023-01-18%2011-28-23-16740139473832.png)
+  - ![](README.assets/rosgraph-16740561625051.png)
+
+  - ![](README.assets/frames1-16740562793104.png)
+
+  - ![](README.assets/Screenshot%20from%202023-01-18%2022-27-55-16740565343001.png)
+
+    
+
+- 运行roslaunch ht_car_multi hunter_multi_base_laser_fixposition_location_follow_car.launch
+
+  - ![](README.assets/rosgraph1-16740562577403.png)
+  - ![](README.assets/frames-16740562149482.png)
+  - ![](README.assets/Screenshot%20from%202023-01-18%2022-38-07-16740565599602.png)
